@@ -1,8 +1,8 @@
-defmodule Doberman.Mixfile do
+defmodule K9.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :doberman,
+    [app: :k9,
      version: "0.1.0",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
@@ -16,7 +16,7 @@ defmodule Doberman.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger],
-     mod: {Doberman.Application, []}]
+     mod: {K9.Application, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -29,6 +29,6 @@ defmodule Doberman.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [{:dialyze, only: [:test, :dev]}]
   end
 end

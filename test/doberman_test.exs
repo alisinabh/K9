@@ -1,6 +1,6 @@
-defmodule DobermanTest do
+defmodule K9Test do
   use ExUnit.Case
-  doctest Doberman
+  doctest K9
 
   test "the truth" do
     assert 1 + 1 == 2

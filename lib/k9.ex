@@ -1,6 +1,6 @@
-defmodule Doberman do
+defmodule K9 do
   @moduledoc """
-  Documentation for Doberman.
+  Documentation for K9.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Doberman do
 
   ## Examples
 
-      iex> Doberman.hello
+      iex> K9.hello
       :world
 
   """

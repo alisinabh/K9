@@ -8,15 +8,15 @@ use Mix.Config
 # if you want to provide default values for your application for
 # 3rd-party users, it should be done in your "mix.exs" file.
 
-config :doberman, dogs: [{Doberman.DnsWatchdog, ['google.com']}]
+config :k9, dogs: [{K9.DnsWatchdog, [{'alisinabh.com', {217,218,155,155}}]}]
 
 # You can configure for your application as:
 #
-#     config :doberman, key: :value
+#     config :k9, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:doberman, :key)
+#     Application.get_env(:k9, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -29,4 +29,4 @@ config :doberman, dogs: [{Doberman.DnsWatchdog, ['google.com']}]
 # Configuration from the imported file will override the ones defined
 # here (which is why it is important to import them last).
 #
-#     import_config "#{Mix.env}.exs"
+#import_config "#{Mix.env}.exs"
