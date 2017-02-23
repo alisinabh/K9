@@ -24,8 +24,8 @@ defmodule K9.Application do
     extract_dogs(dogs, [])
   end
 
-  def extract_dogs([{dog_type, dog_bones} | tail_dogs], acc) do
-    extract_dogs(tail_dogs, [worker(Task, [dog_type, :digg, dog_bones]) | acc])
+  def extract_dogs([{id, dog_type, dog_bones} | tail_dogs], acc) do
+    extract_dogs(tail_dogs, [worker(Task, [dog_type, :digg, dog_bones], id: id) | acc])
   end
 
   def extract_dogs([], acc) do
