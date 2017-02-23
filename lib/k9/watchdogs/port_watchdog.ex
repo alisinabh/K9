@@ -9,7 +9,7 @@ defmodule K9.Watchdog.PortWatchdog do
   def bark({server, port, timeout}) do
     {:ok, ip} = get_server_ip server
 
-    case :gen_tcp.connect(ip, port, [:binary, packet: :raw, active: false]) do
+    case :gen_tcp.connect(ip, port, [:binary, packet: :raw, active: false], timeout) do
       {:ok, _} -> :ok
       _ -> {:error, :port_con_error}
     end
