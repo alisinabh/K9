@@ -12,6 +12,10 @@ defmodule K9.Watchdog.DnsWatchdog do
 
   import K9.Tools.DnsTools
 
+  ###
+  # Watchdog API
+  ###
+
   @doc """
   Checks DNS integrity of an specific FQDN.
   Returns {:ok, :dns_ok} if every thing is ok or {:error, :reason, "Reason string"} in case of error(s)
@@ -26,7 +30,7 @@ defmodule K9.Watchdog.DnsWatchdog do
         cond do
           ttl <= max_ttl and ttl >= min_ttl ->
             {:ok, :dns_ok}
-          true -> {:error, :dnt_ttl_error, "DNS TTL error: " <> to_string(ttl) <> " for: " <> to_string(fqdn)}
+          true -> {:error, :dns_ttl_error, "DNS TTL error: " <> to_string(ttl) <> " for: " <> to_string(fqdn)}
         end
       {:ok, wrong_ip, _} ->
         {:error,
