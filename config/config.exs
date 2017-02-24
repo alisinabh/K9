@@ -8,18 +8,18 @@ use Mix.Config
 # if you want to provide default values for your application for
 # 3rd-party users, it should be done in your "mix.exs" file.
 
-config :k9, dogs: [
-  {:alsinabh_com_dns, K9.Watchdog.DnsWatchdog, [{'alisinabh.com', {46, 165, 242, 224}, 100, 10000}]},
-  {:alisinabh_com_port80, K9.Watchdog.PortWatchdog, [{'alisinabh.com', 80}]}
+config :knine, dogs: [
+  {:alsinabh_com_dns, Knine.Watchdog.DnsWatchdog, [{'alisinabh.com', {46, 165, 242, 224}, 100, 10000}]},
+  {:alisinabh_com_port80, Knine.Watchdog.PortWatchdog, [{'alisinabh.com', 80}]}
 ]
 
 # You can configure for your application as:
 #
-#     config :k9, key: :value
+#     config :knine, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:k9, :key)
+#     Application.get_env(:knine, :key)
 #
 # Or configure a 3rd-party app:
 #

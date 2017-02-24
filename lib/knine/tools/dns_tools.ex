@@ -1,4 +1,4 @@
-defmodule K9.Tools.DnsTools do
+defmodule Knine.Tools.DnsTools do
   @moduledoc """
   Dns resolve tools
   """

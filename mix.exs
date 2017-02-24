@@ -1,21 +1,21 @@
-defmodule K9.Mixfile do
+defmodule Knine.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :k9,
+    [app: :knine,
      version: "0.0.1",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
 
-     name: "K9",
+     name: "Knine",
      description: description(),
-     source_url: "https://github.com/alisinabh/K9",
-     homepage_url: "https://github.com/alisinabh/K9",
-     docs: [main: "K9", # The main page in the docs
-          extras: ["README.md"]]],
-     package: package()
+     source_url: "https://github.com/alisinabh/Knine",
+     homepage_url: "https://github.com/alisinabh/Knine",
+     docs: [main: "Knine", # The main page in the docs
+          extras: ["README.md"]],
+     package: package()]
   end
 
   # Configuration for the OTP application
@@ -24,7 +24,7 @@ defmodule K9.Mixfile do
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
     [extra_applications: [:logger],
-     mod: {K9.Application, []}]
+     mod: {Knine.Application, []}]
   end
 
   # Dependencies can be Hex packages:
@@ -44,17 +44,17 @@ defmodule K9.Mixfile do
 
   defp description do
     """
-    K9 is a deamon to monitor a service availability in different perspectives.
+    Knine is a deamon to monitor a service availability in different perspectives.
     """
   end
 
   defp package do
     [
-      name: :k9,
+      name: :knine,
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       maintainers: ["Alisina Bahadori"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/alisinabh/K9"}
+      links: %{"GitHub" => "https://github.com/alisinabh/Knine"}
      ]
   end
 end

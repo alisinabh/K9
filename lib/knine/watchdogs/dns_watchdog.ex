@@ -1,4 +1,4 @@
-defmodule K9.Watchdog.DnsWatchdog do
+defmodule Knine.Watchdog.DnsWatchdog do
   @moduledoc """
   Tools for checking domain name related issues like:
     - Domain Expiray
@@ -8,9 +8,9 @@ defmodule K9.Watchdog.DnsWatchdog do
     - Record changes
     - Domain SSL public records
   """
-  use K9.Watchdog
+  use Knine.Watchdog
 
-  import K9.Tools.DnsTools
+  import Knine.Tools.DnsTools
 
   ###
   # Watchdog API
@@ -23,7 +23,7 @@ defmodule K9.Watchdog.DnsWatchdog do
   ## Parameters
     - param1: a list in following order: [``fqdn`` as String, ``ip`` as Tuple, ``min_ttl`` as Integer, ``max_ttl`` as Integer]
   """
-  @spec bark({K9.Tools.DnsTools.dns_fqdn, Tuple.t, Integer.t, Integer.t}) :: K9.Watchdog.bark_resp
+  @spec bark({Knine.Tools.DnsTools.dns_fqdn, Tuple.t, Integer.t, Integer.t}) :: Knine.Watchdog.bark_resp
   def bark({fqdn, ip = {_, _, _, _}, min_ttl, max_ttl}) do
     case resolve(fqdn) do
       {:ok, ^ip, ttl} ->
@@ -41,7 +41,7 @@ defmodule K9.Watchdog.DnsWatchdog do
     end
   end
 
-  @spec bark({K9.Tools.DnsTools.dns_fqdn, Integer.t}) :: K9.Watchdog.bark_resp
+  @spec bark({Knine.Tools.DnsTools.dns_fqdn, Integer.t}) :: Knine.Watchdog.bark_resp
   def bark({fqdn, ip}) do
     bark {fqdn, ip, 3600, 21600}
   end

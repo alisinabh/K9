@@ -1,10 +1,10 @@
-defmodule K9.Watchdog.PortWatchdog do
+defmodule Knine.Watchdog.PortWatchdog do
   @moduledoc """
   Deamon and tools for checking a port availability on services
   """
-  use K9.Watchdog
+  use Knine.Watchdog
 
-  import K9.Tools.DnsTools
+  import Knine.Tools.DnsTools
 
   @type port_number :: 1..65536
   @type ip_address :: {Integer.t, Integer.t, Integer.t, Integer.t}
@@ -20,10 +20,10 @@ defmodule K9.Watchdog.PortWatchdog do
     - arg1: a tuple in format of ``{host, port, timeout}`` host is stgirng or an erlang ip, port is an int in range of 1-65536. timeout is int milliseconds.
 
   ## Example
-    iex> K9.Watchdog.PortWatchdog.bark {"google.com", 80, 10000}
+    iex> Knine.Watchdog.PortWatchdog.bark {"google.com", 80, 10000}
     :ok
   """
-  @spec bark({String.t | List.t, port_number, Integer.t}) :: K9.Watchdog.bark_resp
+  @spec bark({String.t | List.t, port_number, Integer.t}) :: Knine.Watchdog.bark_resp
   def bark({server, port, timeout}) do
     case get_server_ip server do
       {:ok, ip} ->
@@ -35,7 +35,7 @@ defmodule K9.Watchdog.PortWatchdog do
     end
   end
 
-  @spec bark({String.t | List.t, port_number}) :: K9.Watchdog.bark_resp
+  @spec bark({String.t | List.t, port_number}) :: Knine.Watchdog.bark_resp
   def bark({server, port}), do: bark({server, port, 10000})
 
   ###

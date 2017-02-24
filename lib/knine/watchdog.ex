@@ -1,4 +1,4 @@
-defmodule K9.Watchdog do
+defmodule Knine.Watchdog do
   @moduledoc """
   Watchdog is a behaviour to use different watchers in same workers
   """
@@ -12,7 +12,7 @@ defmodule K9.Watchdog do
   @doc "``digger/2`` Implementation for Watchdogs"
   defmacro __using__(_) do
     quote do
-      @behaviour K9.Watchdog
+      @behaviour Knine.Watchdog
     end
   end
 

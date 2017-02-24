@@ -1,6 +1,6 @@
 ExUnit.start()
 
-defmodule K9Test.Assertion do
+defmodule KnineTest.Assertion do
   @doc """
   Helper for refute assertion on pattern match
   """
