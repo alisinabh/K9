@@ -44,7 +44,7 @@ defmodule K9.Watchdog.PortWatchdog do
 
   @spec get_server_ip(List.t | String.t | ip_address) :: {:ok, ip_address} | {:error, atom()}
   defp get_server_ip(fqdn) when is_list(fqdn) do
-    case K9.Tools.DnsTools.resolve fqdn do
+    case resolve fqdn do
       {:ok, ip, _} -> {:ok, ip}
       _ -> {:error, :resolve_error}
     end
