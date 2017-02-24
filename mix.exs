@@ -3,16 +3,19 @@ defmodule K9.Mixfile do
 
   def project do
     [app: :k9,
-     version: "0.1.0",
-     elixir: "~> 1.4",
+     version: "0.0.1",
+     elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      deps: deps(),
+
      name: "K9",
+     description: description(),
      source_url: "https://github.com/alisinabh/K9",
      homepage_url: "https://github.com/alisinabh/K9",
      docs: [main: "K9", # The main page in the docs
-          extras: ["README.md"]]]
+          extras: ["README.md"]]],
+     package: package()
   end
 
   # Configuration for the OTP application
@@ -37,5 +40,21 @@ defmodule K9.Mixfile do
     [{:dialyze, only: [:test, :dev]},
      {:ex_doc, only: [:test, :dev]},
      {:earmark, only: [:test, :dev]}]
+  end
+
+  defp description do
+    """
+    K9 is a deamon to monitor a service availability in different perspectives.
+    """
+  end
+
+  defp package do
+    [
+      name: :k9,
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Alisina Bahadori"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/alisinabh/K9"}
+     ]
   end
 end
