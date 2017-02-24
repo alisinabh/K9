@@ -1,5 +1,3 @@
 defmodule Knine do
-  @moduledoc """
-  Knine default module
-  """
+  @moduledoc false
 end

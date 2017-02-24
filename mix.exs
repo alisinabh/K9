@@ -13,7 +13,7 @@ defmodule Knine.Mixfile do
      description: description(),
      source_url: "https://github.com/alisinabh/Knine",
      homepage_url: "https://github.com/alisinabh/Knine",
-     docs: [main: "Knine", # The main page in the docs
+     docs: [main: "readme", # The main page in the docs
           extras: ["README.md"]],
      package: package()]
   end
