@@ -7,7 +7,12 @@ defmodule K9.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps()]
+     deps: deps(),
+     name: "K9",
+     source_url: "https://github.com/alisinabh/K9",
+     homepage_url: "https://github.com/alisinabh/K9",
+     docs: [main: "K9", # The main page in the docs
+          extras: ["README.md"]]]
   end
 
   # Configuration for the OTP application
@@ -29,6 +34,8 @@ defmodule K9.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:dialyze, only: [:test, :dev]}]
+    [{:dialyze, only: [:test, :dev]},
+     {:ex_doc, only: [:test, :dev]},
+     {:earmark, only: [:test, :dev]}]
   end
 end
