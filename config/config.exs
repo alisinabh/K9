@@ -8,10 +8,6 @@ use Mix.Config
 # if you want to provide default values for your application for
 # 3rd-party users, it should be done in your "mix.exs" file.
 
-config :knine, dogs: [
-  {:alsinabh_com_dns, Knine.Watchdog.DnsWatchdog, [{'alisinabh.com', {46, 165, 242, 224}, 100, 10000}]},
-  {:alisinabh_com_port80, Knine.Watchdog.PortWatchdog, [{'alisinabh.com', 80}]}
-]
 
 # You can configure for your application as:
 #

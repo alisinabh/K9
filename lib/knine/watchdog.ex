@@ -17,13 +17,13 @@ defmodule Knine.Watchdog do
   end
 
   @spec digg(atom(), Tuple.t, Integer.t) :: :ok
-  def digg(module, settings, timeout \\ 20000) do
+  def digg(module, settings, interval \\ 20000) do
     Logger.info  to_string(__MODULE__) <> " starting..."
-    bark_loop(module, settings, timeout)
+    bark_loop(module, settings, interval)
   end
 
   @spec bark_loop(atom(), Tuple.t, Integer.t) :: :ok
-  defp bark_loop(module, settings, timeout) do
+  defp bark_loop(module, settings, interval) do
     case module.bark(settings) do
       :ok ->
         Logger.debug to_string(__MODULE__) <> " Returned OK!"
@@ -37,7 +37,7 @@ defmodule Knine.Watchdog do
         Logger.info message <> " " <> to_string(reason)
     end
 
-    :timer.sleep(timeout)
-    bark_loop(module, settings, timeout)
+    :timer.sleep(interval)
+    bark_loop(module, settings, interval)
   end
 end
