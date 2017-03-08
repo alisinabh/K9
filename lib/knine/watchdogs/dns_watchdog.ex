@@ -29,15 +29,15 @@ defmodule Knine.Watchdog.DnsWatchdog do
       {:ok, ^ip, ttl} ->
         cond do
           ttl <= max_ttl and ttl >= min_ttl ->
-            {:ok, :dns_ok}
-          true -> {:error, :dns_ttl_error, "DNS TTL error: " <> to_string(ttl) <> " for: " <> to_string(fqdn)}
+            {:low, nil}
+          true ->
+            {:moderate, "DNS TTL error: #{to_string(ttl)} for: #{to_string(fqdn)}"}
         end
       {:ok, wrong_ip, _} ->
-        {:error,
-         :wrong_ip,
-         to_string(fqdn) <> " is redirected to wrong ip: " <> to_string(:inet_parse.ntoa(wrong_ip))
-          <> " instead of: " <> to_string(:inet_parse.ntoa(ip))}
-      {:error, type} -> {:error, type}
+        {:major,
+          "#{to_string(fqdn)} is redirected to wrong ip: #{to_string(:inet_parse.ntoa(wrong_ip))} instead of: #{to_string(:inet_parse.ntoa(ip))}"}
+      {:error, type} ->
+        {:critical, to_string(type)}
     end
   end
 

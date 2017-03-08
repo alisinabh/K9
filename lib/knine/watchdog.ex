@@ -4,40 +4,35 @@ defmodule Knine.Watchdog do
   """
   require Logger
 
-  @type bark_resp :: :ok | {:ok, atom()} | {:ok, atom(), String.t} | {:error, atom()} | {:error, atom(), String.t}
+  @type bark_resp :: {:low, String.t} | {:moderate, String.t} | {:major, String.t} | {:critical, String.t}
 
-  @doc "A call to watcher to check healthyness of specific paeameter(s)"
+  @doc "A call to watcher for checking healthyness of specific parameters(s)"
   @callback bark(Tuple.t) :: bark_resp
 
-  @doc "``digger/2`` Implementation for Watchdogs"
   defmacro __using__(_) do
     quote do
       @behaviour Knine.Watchdog
     end
   end
 
-  @spec digg(atom(), Tuple.t, Integer.t) :: :ok
-  def digg(module, settings, interval \\ 20000) do
-    Logger.info  to_string(__MODULE__) <> " starting..."
-    bark_loop(module, settings, interval)
+  @spec digg(atom(), Tuple.t, Integer.t, Tuple.t) :: :ok
+  def digg(module, settings, interval \\ 20000, buzzer_info) do
+    Logger.info "#{to_string(module)} starting..."
+    bark_loop(module, settings, interval, buzzer_info)
+    # TODO: ability to add multiple buzzers on a single watchdog.
+    # Maybe add watch groups?
   end
 
-  @spec bark_loop(atom(), Tuple.t, Integer.t) :: :ok
-  defp bark_loop(module, settings, interval) do
-    case module.bark(settings) do
-      :ok ->
-        Logger.debug to_string(__MODULE__) <> " Returned OK!"
-      {:ok, reason} ->
-        Logger.debug to_string(__MODULE__) <> " Returned OK: " <> to_string(reason)
-      {:ok, reason, message} ->
-        Logger.debug to_string(__MODULE__) <> " Returned OK: " <> to_string(reason) <> " And says: " <> message
-      {:error, reason} ->
-        Logger.info to_string(reason) <> " Error occured!"
-      {:error, reason, message} ->
-        Logger.info message <> " " <> to_string(reason)
-    end
+  @spec bark_loop(atom(), Tuple.t, Integer.t, Tuple.t) :: :ok
+  defp bark_loop(module, settings, interval, {buzzer, buzz_settings}) do
+    bark_result = module.bark(settings)
+    buzzer.buzz(bark_result)
 
     :timer.sleep(interval)
     bark_loop(module, settings, interval)
+  end
+
+  def register_dog() do
+
   end
 end
