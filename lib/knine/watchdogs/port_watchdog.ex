@@ -17,7 +17,7 @@ defmodule Knine.Watchdog.PortWatchdog do
   Whatchdog bark api which checks for port availability on a host.
 
   ## Parameters
-    - arg1: a tuple in format of ``{host, port, timeout}`` host is stgirng or an erlang ip, port is an int in range of 1-65536. timeout is int milliseconds.
+    - arg1: a tuple in format of ``{host, port, timeout}`` host is string or an erlang ip, port is an int in range of 1-65536. timeout is int milliseconds.
 
   ## Example
     iex> Knine.Watchdog.PortWatchdog.bark {"google.com", 80, 10000}
@@ -28,8 +28,9 @@ defmodule Knine.Watchdog.PortWatchdog do
     case get_server_ip server do
       {:ok, ip} ->
         case :gen_tcp.connect(ip, port, [:binary, packet: :raw, active: false], timeout) do
-          {:ok, _} -> :ok
-          _ -> {:error, :port_con_error}
+          {:ok, _} -> {:low, nil}
+          _ ->
+            {:critical, "TCP Connection error to: #{to_string(:inet_parse.ntoa(ip))}:#{port}"}
         end
       error -> error
     end
@@ -46,7 +47,7 @@ defmodule Knine.Watchdog.PortWatchdog do
   defp get_server_ip(fqdn) when is_list(fqdn) do
     case resolve fqdn do
       {:ok, ip, _} -> {:ok, ip}
-      _ -> {:error, :resolve_error}
+      _ -> {:major, "Domain resolve error: #{fqdn}"}
     end
   end
 
